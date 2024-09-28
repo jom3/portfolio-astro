@@ -1,0 +1,22 @@
+---
+import { technologies } from '../../data/technologies'
+interface Props{
+  type:string;
+}
+
+const { type } = Astro.props as Props
+
+const technologyList = technologies.filter((tech)=>tech.use===type)
+---
+<div class="w-[400px] min-h-40 bg-bg_secondary rounded-lg hover:shadow-md duration-200 transition-all hover:shadow-danger">
+  <h1 class="text-center text-2xl text-danger font-semibold">{type.toUpperCase()}</h1>
+  <div class="flex flex-row justify-center items-center flex-wrap p-2 gap-4">
+    {
+      technologyList.map(tech=>{
+        return(
+          <img src={`/images/tech/${tech.name}.svg`} class="w-14" alt={tech.name}>
+        )
+      })
+    }
+  </div>
+</div>

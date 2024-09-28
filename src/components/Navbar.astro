@@ -1,0 +1,52 @@
+---
+import Logo from './Logo.astro'
+---
+<header class="w-full fixed top-0 flex flex-row justify-between md:justify-center gap-10 px-10 py-2 md:p-2 z-10 bg-[#13151a] bg-opacity-80">
+  <Logo logoSize="72"/>
+  <nav class="items-center justify-center hidden md:flex">
+    <ul class="flex flex-row gap-5">
+      <li class="font-semibold text-lg text-text_primary hover:text-text_secondary transition"><a href="#about">./About</a></li>
+      <li class="font-semibold text-lg text-text_primary hover:text-text_secondary transition"><a href="#services">./Services</a></li>
+      <li class="font-semibold text-lg text-text_primary hover:text-text_secondary transition"><a href="#projects">./Projects</a></li>
+      <li class="font-semibold text-lg text-text_primary hover:text-text_secondary transition"><a href="#technologies">./Techonologies</a></li>
+      <li class="font-semibold text-lg text-text_primary hover:text-text_secondary transition"><a href="#contact">./Contact</a></li>
+    </ul>
+  </nav>
+  <button class="block md:hidden" id="menu"><img src="/icons/menu.svg" alt="menu" class="w-10"></button>
+</header>
+<aside class="fixed top-24 p-10 z-10 flex justify-center items-center right-2 bg-bg_secondary opacity-0 transition-all duration-300" id="aside">
+  <ul class="flex flex-col gap-5">
+    <li class="item font-semibold text-lg text-text_primary hover:text-text_secondary transition"><a href="#about">./About</a></li>
+    <li class="item font-semibold text-lg text-text_primary hover:text-text_secondary transition"><a href="#services">./Services</a></li>
+    <li class="item font-semibold text-lg text-text_primary hover:text-text_secondary transition"><a href="#projects">./Projects</a></li>
+    <li class="item font-semibold text-lg text-text_primary hover:text-text_secondary transition"><a href="#technologies">./Techonologies</a></li>
+    <li class="item font-semibold text-lg text-text_primary hover:text-text_secondary transition"><a href="#contact">./Contact</a></li>
+  </ul>
+</aside>
+
+<script>
+  const sidenav = document.getElementById('aside') as HTMLElement
+  const sidenavItem = document.querySelectorAll('.item')
+  const menu = document.getElementById('menu') as HTMLElement
+
+  menu.addEventListener('click', ()=>{
+    const sidenavClasses = sidenav.classList
+    console.log(sidenavClasses)
+    if(sidenavClasses.contains('opacity-0')){
+      sidenav.classList.replace('opacity-0','opacity-100')
+    }else{
+      sidenav.classList.replace('opacity-100','opacity-0')
+    }
+  })
+
+  sidenav.addEventListener('mouseleave',()=>{
+    sidenav.classList.replace('opacity-100','opacity-0')
+  })
+  
+  sidenavItem.forEach((item)=>{
+    item.addEventListener('click',()=>{
+      sidenav.classList.replace('opacity-100','opacity-0')
+    })
+  })
+
+</script>

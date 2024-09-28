@@ -1,0 +1,25 @@
+---
+import type { Project } from "../../interfaces/project";
+
+interface Props {
+  project:Project
+}
+
+const { project } = Astro.props as Props;
+const { title,desc,images,techs} = project
+---
+
+<a href={`/project/${title.replaceAll(' ','_').toLowerCase()}`} class="flex flex-col justify-evenly w-96 h-[550px] p-2 rounded-lg gap-5 bg-bg_secondary cursor-pointer shadow-lg hover:shadow-bg_primary transition-all duration-200">
+  <img transition:name={`project_${title.toLowerCase().replaceAll(' ','_')}`} src={`/images/projects/${images[0]}`} alt={title} class="w-full h-56 object-fill rounded-t-lg">
+  <h1 transition:name={`title_${title.toLowerCase().replaceAll(' ','_')}`} class="text-3xl text-center uppercase text-danger">{project.title}</h1>
+  <p class="prose prose-invert">{desc}</p>
+  <div class="w-full flex flex-row justify-center items-center gap-1">
+    {
+      techs.map(tech=>{
+        return(
+          <img src={`/images/tech/${tech}.svg`} alt={tech} class="w-10">
+        )
+      })
+    }
+  </div>
+</a>

@@ -1,0 +1,52 @@
+---
+import { projects } from '../../data/projects'
+import type { Project } from '../../interfaces/project';
+import TechLayout from '../../layouts/TechLayout.astro';
+export const prerender = true;
+export async function getStaticPaths () {
+  return [
+    {params :{id:'todo_app'}},
+    {params :{id:'moviedb_app'}},
+    {params :{id:'rick_and_morty'}},
+    {params :{id:'slow_movies'}},
+    {params :{id:'personal_portfolio'}},
+  ]
+}
+const { id } = Astro.params;
+const project = projects.find((project)=>project.title.toLowerCase().replaceAll(' ','_')===id) as Project
+const { desc, images, links, techs, title } = project
+---
+
+<TechLayout title={`Project - ${title.toUpperCase()}`}>
+  <div class="w-full flex flex-col md:flex-row min-h-screen gap-10 p-10 justify-center items-center">
+    <div class="flex flex-col gap-4 justify-center items-center w-72">
+      <a href="/#projects" class="underline flex flex-row gap-1"><img src="/icons/arrow-left.svg" alt="arrow-left icon" class="w-4">Go back</a>
+      <img transition:name={`project_${title.toLowerCase().replaceAll(' ','_')}`} src={`/images/projects/${images[0]}`} alt={title} class="w-full object-cover">
+      <h1 transition:name={`title_${title.toLowerCase().replaceAll(' ','_')}`} class="text-center font-bold text-3xl">{title.toUpperCase()}</h1>
+    </div>
+    <div class="w-full md:w-[400px] flex flex-col gap-5 ">
+      <span class="font-semibold">Description:</span>
+      <p class="prose prose-invert">{desc}</p>
+      <span class="font-semibold">Technologies:</span>
+      <div class="flex flex-row gap-2 flex-wrap">
+        {
+          techs.map(tech=>{
+            return(
+              <img src={`/images/tech/${tech}.svg`} alt={tech} class="w-10">
+            )
+          })
+        }
+      </div>
+      <span class="font-semibold">Repository/ies:</span>
+      <div class="flex flex-row justify-evenly flex-wrap">
+        {
+          links.map((link,index)=>{
+            return (
+              <a href={link} target="_blank" class="px-5 py-2 text-center bg-accent w-40 rounded-lg text-bg_secondary font-bold hover:text-accent hover:bg-bg_secondary transition-all duration-150"> {index==0?'FrontEnd':'Backend'} </a>
+            )
+          })
+        }
+      </div>
+    </div>
+  </div>
+</TechLayout>

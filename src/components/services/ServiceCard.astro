@@ -1,0 +1,11 @@
+---
+
+const { service } = Astro.props
+const { icon, title, desc } = service
+---
+
+<article class="w-72 flex flex-col justify-center items-center gap-5 text-center bg-bg_secondary p-5 rounded-lg hover:shadow-lg hover:shadow-danger duration-200 transition-all">
+  <img src={`icons/${icon}`} alt={title}>
+  <h3 class="font-semibold">{title}</h3>
+  <p class="prose prose-invert">{desc}</p>
+</article>

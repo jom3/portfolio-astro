@@ -1,0 +1,17 @@
+---
+import {projects} from '../data/projects'
+import ProjectCard from './projects/ProjectCard.astro'
+---
+
+<section class="w-full min-h-screen flex flex-col px-5 pt-20 md:justify-center items-center" id="projects">
+  <h1 class="text-4xl mb-5">My <span class="text-danger">Projects</span></h1>
+  <div class="w-full flex flex-row gap-5 flex-wrap justify-evenly items-center">
+    {
+      projects.map((project)=>{
+        return (
+          <ProjectCard project={project} />
+        )
+      })
+    }
+  </div>
+</section>
